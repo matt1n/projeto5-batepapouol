@@ -13,18 +13,19 @@ let nome = prompt("Qual o seu nome")
 const main = document.querySelector('.main')
 let texto = document.querySelector('.texto')
 
-//---------------------------API------------------------------
+//---------------------------API entrar------------------------------
 
 let dadoEntrar = {name: nome}
 function entrar() {
-const promessaEntrar = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', dadoEntrar)
-promessaEntrar.then(sucesso)
-promessaEntrar.catch(erro)}
+    const promessaEntrar = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', dadoEntrar)
+    promessaEntrar.then(sucessoEntrar)
+    promessaEntrar.catch(erroEntrar)
+}
 entrar()
-function sucesso(resposta){
+function sucessoEntrar(resposta){
     console.log('foi')
 }
-function erro(resposta){
+function erroEntrar(resposta){
     if (resposta.response.status===400) {
         nome = prompt("Qual o seu nome")
         dadoEntrar = {name: nome}
@@ -32,7 +33,24 @@ function erro(resposta){
     }
 } 
 
-//---------------------------API------------------------------
+//---------------------------fim API entrar------------------------------
+//---------------------------API status------------------------------
+function testarStatus() {
+    const promessaStatus = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', dadoEntrar)
+    promessaStatus.then(sucessoStatus)
+    promessaStatus.catch(erroStatus)
+}
+let aaaa = setInterval(testarStatus, 5000)
+function sucessoStatus(resposta) {
+    console.log('Pai/Mãe tá on')
+}
+function erroStatus(resposta) {
+    clearInterval(aaaa)
+    console.log(resposta.response.status)
+}
+
+
+//---------------------------fim API status------------------------------
 
 function mensagem() {
     if (texto.value!==""){
