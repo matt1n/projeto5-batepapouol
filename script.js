@@ -51,7 +51,7 @@ function erroStatus(resposta) {
 }
 
 //---------------------------fim API status------------------------------
-//---------------------------API mensagem------------------------------
+//---------------------------API busca mensagem------------------------------
 
 function buscarMensagens() {
     const promessaMensagem = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages')
@@ -61,6 +61,7 @@ function buscarMensagens() {
 buscarMensagens()
 
 function sucessoMensagem(resposta) {
+    main.innerHTML = ""
     for (i=0; i<resposta.data.length; i++) {
         if (resposta.data[i].type==="message") {
             main.innerHTML += `<li><div class="mensagem">
@@ -80,21 +81,34 @@ function sucessoMensagem(resposta) {
         }
     }
 }
+setInterval(buscarMensagens, 3000)
 function erroMensagem(resposta) {
     console.log('iiii deu erro')
 }
 
-//---------------------------fim API mensagem------------------------------
+//---------------------------fim API busca mensagem------------------------------
+//---------------------------API envia mensagem------------------------------
 
+function mandarMensagem(){
+    let enviarMensagem = {from: nome, to: "Todos", text: texto.value, type: "message"}
+    if (texto.value!==""){
+        const promessaEnviaMensagem = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', enviarMensagem)
+        promessaEnviaMensagem.then(buscarMensagens)
+        texto.value= ""
+        promessaEnviaMensagem.catch(erroEnviarMensagem)
+        function erroEnviarMensagem(resposta){
+            console.log(resposta)
+        }
+    }
+}
+
+//---------------------------API envia mensagem------------------------------
 function mensagem() {
     if (texto.value!==""){
         main.innerHTML += `<li><div class="mensagem">
             <span ></span><span ><strong>${nome}</strong> para <strong>Todos</strong>: ${texto.value}</span>
         </div></li>`
     texto.value=""
-    let ultimaMensagem = main.children.length-1
-    let novaMensagem = main.children[ultimaMensagem]
-    novaMensagem.scrollIntoView();
     }
 
 }
