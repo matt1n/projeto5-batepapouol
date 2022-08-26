@@ -97,7 +97,7 @@ function mandarMensagem(){
         texto.value= ""
         promessaEnviaMensagem.catch(erroEnviarMensagem)
         function erroEnviarMensagem(resposta){
-            console.log(resposta)
+            window.location.reload()
         }
     }
 }
