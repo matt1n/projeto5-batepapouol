@@ -35,6 +35,7 @@ function erroEntrar(resposta){
 
 //---------------------------fim API entrar------------------------------
 //---------------------------API status------------------------------
+
 function testarStatus() {
     const promessaStatus = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', dadoEntrar)
     promessaStatus.then(sucessoStatus)
@@ -46,16 +47,49 @@ function sucessoStatus(resposta) {
 }
 function erroStatus(resposta) {
     clearInterval(aaaa)
-    console.log(resposta.response.status)
+    window.location.reload(true)
 }
 
-
 //---------------------------fim API status------------------------------
+//---------------------------API mensagem------------------------------
+
+function buscarMensagens() {
+    const promessaMensagem = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages')
+    promessaMensagem.then(sucessoMensagem)
+    promessaMensagem.catch(erroMensagem)
+}
+buscarMensagens()
+
+function sucessoMensagem(resposta) {
+    for (i=0; i<resposta.data.length; i++) {
+        if (resposta.data[i].type==="message") {
+            main.innerHTML += `<li><div class="mensagem">
+                <span class="hora">${resposta.data[i].time}</span> 
+                <span><strong>${resposta.data[i].from}</strong> para <strong>${resposta.data[i].to}</strong>: ${resposta.data[i].text}</span>
+            </div></li>`
+        } else if (resposta.data[i].type==="private_message") {
+            main.innerHTML += `<li><div class="mensagem reservado">
+                <span class="hora">${resposta.data[i].time}</span> 
+                <span><strong>${resposta.data[i].from}</strong> reservadamente para <strong>${resposta.data[i].to}</strong>: ${resposta.data[i].text}</span>
+            </div></li>`
+        } else {
+            main.innerHTML += `<li><div class="mensagem status">
+                <span class="hora">${resposta.data[i].time}</span> 
+                <span><strong>${resposta.data[i].from}</strong> ${resposta.data[i].text}</span>
+            </div></li>`
+        }
+    }
+}
+function erroMensagem(resposta) {
+    console.log('iiii deu erro')
+}
+
+//---------------------------fim API mensagem------------------------------
 
 function mensagem() {
     if (texto.value!==""){
         main.innerHTML += `<li><div class="mensagem">
-            <span ><strong>${nome}</strong> para <strong>Todos</strong>: ${texto.value}</span>
+            <span ></span><span ><strong>${nome}</strong> para <strong>Todos</strong>: ${texto.value}</span>
         </div></li>`
     texto.value=""
     let ultimaMensagem = main.children.length-1
