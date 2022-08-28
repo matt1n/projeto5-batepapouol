@@ -43,12 +43,10 @@ function entrar() {
     }
 }
 function sucessoEntrar(resposta){
-    console.log('foi')
     telaCarregamento.classList.add('oculta')
     chat.classList.remove('oculta')
 }
 function erroEntrar(resposta){
-    console.log(resposta)
     if (resposta.response.status===400) {
         telaCarregamento.classList.add('oculta')
         telaInicial.classList.remove('oculta')
@@ -68,7 +66,6 @@ function testarStatus() {
 }
 let aaaa = setInterval(testarStatus, 5000)
 function sucessoStatus(resposta) {
-    console.log('Pai/Mãe tá on')
 }
 function erroStatus(resposta) {
     clearInterval(aaaa)
@@ -134,7 +131,6 @@ function sucessoBuscarUsuario(resposta) {
     <span>Todos</span></div class="iconNome">
     <ion-icon class="check" name="checkmark-outline"></ion-icon>
 </li>`
-    console.log(resposta.data)
     for (i=0; i<resposta.data.length; i++) {
         listaUsuarios.innerHTML+=`<li data-identifier="participant" onclick="selecionaContato(this); mudaInput()">
         <div class="iconNome"><ion-icon name="person-circle"></ion-icon>

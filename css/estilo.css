@@ -103,6 +103,9 @@ body {
 .mensagem span {
     word-wrap: break-word;
 }
+.hora{
+    color: #AAAAAA;
+}
 .status{
     background-color: #DCDCDC;
 }
