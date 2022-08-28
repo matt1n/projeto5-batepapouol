@@ -64,11 +64,11 @@ function testarStatus() {
         promessaStatus.catch(erroStatus)
     }
 }
-let aaaa = setInterval(testarStatus, 5000)
-function sucessoStatus(resposta) {
+let paraInterval = setInterval(testarStatus, 5000)
+function sucessoStatus() {
 }
-function erroStatus(resposta) {
-    clearInterval(aaaa)
+function erroStatus() {
+    clearInterval(paraInterval)
     window.location.reload(true)
 }
 
@@ -109,8 +109,8 @@ function sucessoMensagem(resposta) {
     novaMensagem.scrollIntoView();
 }
 setInterval(buscarMensagens, 3000)
-function erroMensagem(resposta) {
-    console.log('iiii deu erro')
+function erroMensagem() {
+    window.location.reload()
 }
 
 //---------------------------fim API busca mensagem------------------------------
@@ -126,11 +126,19 @@ const listaUsuarios = document.querySelector('.listaUsuarios')
 
 function sucessoBuscarUsuario(resposta) {
     listaUsuarios.innerHTML=""
-    listaUsuarios.innerHTML+=`<li onclick="selecionaContato(this); mudaInput()">
-    <div class="iconNome"><ion-icon name="people"></ion-icon>
-    <span>Todos</span></div class="iconNome">
-    <ion-icon class="check" name="checkmark-outline"></ion-icon>
-</li>`
+    if (nomeUsuario==="Todos"){
+        listaUsuarios.innerHTML+=`<li onclick="selecionaContato(this); mudaInput()">
+        <div class="iconNome"><ion-icon name="people"></ion-icon>
+        <span>Todos</span></div class="iconNome">
+        <ion-icon class="check selecionado" name="checkmark-outline"></ion-icon>
+        </li>`
+    } else {
+        listaUsuarios.innerHTML+=`<li onclick="selecionaContato(this); mudaInput()">
+        <div class="iconNome"><ion-icon name="people"></ion-icon>
+        <span>Todos</span></div class="iconNome">
+        <ion-icon class="check" name="checkmark-outline"></ion-icon>
+        </li>`
+    }
     for (i=0; i<resposta.data.length; i++) {
         if (resposta.data[i].name===nomeUsuario){
             listaUsuarios.innerHTML+=`<li data-identifier="participant" onclick="selecionaContato(this); mudaInput()">
@@ -202,7 +210,7 @@ function mandarMensagem(){
         promessaEnviaMensagem.then(buscarMensagens)
         texto.value= ""
         promessaEnviaMensagem.catch(erroEnviarMensagem)
-        function erroEnviarMensagem(resposta){
+        function erroEnviarMensagem(){
             window.location.reload()
         }
     } else {
@@ -211,7 +219,7 @@ function mandarMensagem(){
         promessaEnviaMensagem.then(buscarMensagens)
         texto.value= ""
         promessaEnviaMensagem.catch(erroEnviarMensagem)
-        function erroEnviarMensagem(resposta){
+        function erroEnviarMensagem(){
             window.location.reload()
         }
     }
