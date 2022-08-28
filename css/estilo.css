@@ -104,7 +104,8 @@ body {
     word-wrap: break-word;
 }
 .hora{
-    color: #aaaaaa;
+    color: #afb1ae;
+    background-color: #DCDCDC;
 }
 .status{
     background-color: #DCDCDC;
@@ -164,7 +165,7 @@ input::placeholder{
     z-index: 2;
 }
 .sidebar{
-    width: 69%;
+    width: 259px;
     height: 100%;
     background-color: #FFFFFF;
     position: fixed;
