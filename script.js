@@ -133,7 +133,7 @@ function sucessoBuscarUsuario(resposta) {
 </li>`
     for (i=0; i<resposta.data.length; i++) {
         listaUsuarios.innerHTML+=`<li data-identifier="participant" onclick="selecionaContato(this); mudaInput()">
-        <div class="iconNome"><ion-icon name="person-circle"></ion-icon>
+        <div class="iconNome"><div><ion-icon name="person-circle"></ion-icon></div>
         <span>${resposta.data[i].name}</span></div class="iconNome">
         <ion-icon class="check" name="checkmark-outline"></ion-icon>
     </li>`

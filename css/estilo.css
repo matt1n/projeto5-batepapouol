@@ -94,6 +94,9 @@ body {
     font-size: 14px;
     font-weight: 400;
 }
+.semScroll{
+    overflow-y: none;
+}
 .mensagem{
     width: 100%;
     padding: 15px 8px;
@@ -174,6 +177,7 @@ input::placeholder{
     display: flex;
     flex-direction: column;
     padding: 0 17px;
+    overflow-y: auto;
 }
 .tituloSelecao{
     font-weight: 700;
