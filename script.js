@@ -97,7 +97,7 @@ function sucessoMensagem(resposta) {
                 <span class="hora">(${resposta.data[i].time})</span> 
                 <span><strong>${resposta.data[i].from}</strong> reservadamente para <strong>${resposta.data[i].to}</strong>: ${resposta.data[i].text}</span>
             </div></li>`
-        } else {
+        } else if (resposta.data[i].type==="status"){
             main.innerHTML += `<li><div class="mensagem status">
                 <span class="hora">(${resposta.data[i].time})</span> 
                 <span><strong>${resposta.data[i].from}</strong> ${resposta.data[i].text}</span>
