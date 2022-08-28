@@ -94,9 +94,6 @@ body {
     font-size: 14px;
     font-weight: 400;
 }
-.semScroll{
-    overflow-y: none;
-}
 .mensagem{
     width: 100%;
     padding: 15px 8px;

@@ -132,11 +132,19 @@ function sucessoBuscarUsuario(resposta) {
     <ion-icon class="check" name="checkmark-outline"></ion-icon>
 </li>`
     for (i=0; i<resposta.data.length; i++) {
-        listaUsuarios.innerHTML+=`<li data-identifier="participant" onclick="selecionaContato(this); mudaInput()">
-        <div class="iconNome"><div><ion-icon name="person-circle"></ion-icon></div>
-        <span>${resposta.data[i].name}</span></div class="iconNome">
-        <ion-icon class="check" name="checkmark-outline"></ion-icon>
-    </li>`
+        if (resposta.data[i].name===nomeUsuario){
+            listaUsuarios.innerHTML+=`<li data-identifier="participant" onclick="selecionaContato(this); mudaInput()">
+            <div class="iconNome"><div><ion-icon name="person-circle"></ion-icon></div>
+            <span>${resposta.data[i].name}</span></div class="iconNome">
+            <ion-icon class="check selecionado" name="checkmark-outline"></ion-icon>
+        </li>`
+        }else{
+            listaUsuarios.innerHTML+=`<li data-identifier="participant" onclick="selecionaContato(this); mudaInput()">
+            <div class="iconNome"><div><ion-icon name="person-circle"></ion-icon></div>
+            <span>${resposta.data[i].name}</span></div class="iconNome">
+            <ion-icon class="check" name="checkmark-outline"></ion-icon>
+            </li>`
+        }
     }
 }
 buscarUsuario()
